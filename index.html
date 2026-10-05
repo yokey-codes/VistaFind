@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VistaFind - Discover Visual Ideas</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <div class="brand-icon">VF</div>
+
+            <div>
+                <h1>VistaFind</h1>
+                <p>Discover something worth seeing.</p>
+            </div>
+        </div>
+
+        <span class="header-badge">Visual Explorer</span>
+    </header>
+
+
+    <main class="main-content">
+
+        <section class="hero-section">
+
+            <p class="eyebrow">IMAGE DISCOVERY</p>
+
+            <h2>Find inspiration for your next idea.</h2>
+
+            <p class="intro">
+                Search for a topic and explore a world of visual inspiration.
+            </p>
+
+
+            <form class="search-form">
+
+                <div class="search-wrapper">
+                    <label for="searchInput">Search for images</label>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        name="search"
+                        placeholder="Try mountains, architecture, space..."
+                    >
+                </div>
+
+                <button type="submit" id="searchButton">
+                    Search
+                </button>
+
+                <button type="reset" id="clearButton">
+                    Clear
+                </button>
+
+            </form>
+
+
+            <div class="quick-picks">
+
+                <span class="quick-title">Quick picks</span>
+
+                <button type="button" class="chip">Nature</button>
+                <button type="button" class="chip">Cities</button>
+                <button type="button" class="chip">Animals</button>
+                <button type="button" class="chip">Space</button>
+
+            </div>
+
+        </section>
+
+
+        <section class="results-section">
+
+            <div class="results-header">
+
+                <div>
+                    <h3>Explore results</h3>
+                    <p id="resultCount">Results will appear here</p>
+                </div>
+
+            </div>
+
+
+            <div id="results" class="results-grid">
+            </div>
+
+
+            <div id="emptyState" class="empty-state">
+
+                <div class="empty-icon">✦</div>
+
+                <h3>Search to see results</h3>
+
+                <p>
+                    Enter a topic above and your visual discoveries will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>VistaFind · A simple visual discovery experience</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

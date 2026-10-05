@@ -1,0 +1,3 @@
+# VistaFind
+
+VistaFind is an image discovery web app where users will eventually be able to search for a topic and browse matching images in a responsive grid. I chose a teal and orange colour palette to give the app a fresh visual identity that is different from the reference design. I added quick-pick category chips so users can easily discover common topics, and a Clear button to make resetting the search easier. I also used a sticky header so the VistaFind branding remains visible while users scroll through results.
