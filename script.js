@@ -19,6 +19,15 @@ form.addEventListener("submit", async (event) => {
         return;
     }
 
+    // Clear previous results
+    results.innerHTML = "";
+
+    // Hide the normal empty-state illustration
+    emptyState.style.display = "none";
+
+    // Show loading message
+    resultCount.textContent = `Searching for "${query}"...`;
+
     // Build the Wikimedia Commons API URL
     const url =
         "https://commons.wikimedia.org/w/api.php?action=query" +
@@ -32,55 +41,69 @@ form.addEventListener("submit", async (event) => {
         "&format=json" +
         "&origin=*";
 
-    // Fetch the API data
-    const response = await fetch(url);
+    try {
+        // Fetch the API data
+        const response = await fetch(url);
 
-    // Check if the request was successful
-    if (!response.ok) {
-        throw new Error(response.status);
+        // Check if the request was successful
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        // Convert the response to JavaScript data
+        const data = await response.json();
+
+        // Get the image results
+        const items = Object.values(data.query?.pages || {});
+
+        // Check if there are no results
+        if (items.length === 0) {
+            resultCount.textContent =
+                `No results found for "${query}". Try another search.`;
+            return;
+        }
+
+        // Show result count
+        resultCount.textContent =
+            `Showing ${items.length} results for "${query}"`;
+
+        // Create a card for every image
+        items.forEach((item) => {
+
+            // Create the card
+            const card = document.createElement("article");
+            card.className = "card";
+
+            // Create the image
+            const img = document.createElement("img");
+            img.src = item.imageinfo[0].thumburl;
+            img.alt = item.title;
+
+            // Create the caption
+            const caption = document.createElement("p");
+            caption.textContent = item.title;
+
+            // Add image to card
+            card.appendChild(img);
+
+            // Add caption to card
+            card.appendChild(caption);
+
+            // Add card to results grid
+            results.appendChild(card);
+        });
+
+    } catch (error) {
+
+        // Clear any partial results
+        results.innerHTML = "";
+
+        // Show friendly error message
+        resultCount.textContent =
+            "Something went wrong. Please try again.";
+            
+        console.error("Search error:", error);
     }
-
-    // Convert the response to JavaScript data
-    const data = await response.json();
-
-    // Get the image results
-    const items = Object.values(data.query?.pages || {});
-
-    // Clear previous results
-    results.innerHTML = "";
-
-    // Hide the empty state
-    emptyState.style.display = "none";
-
-    // Show the number of results
-    resultCount.textContent =
-        `Showing ${items.length} results for "${query}"`;
-
-    // Create a card for every image
-    items.forEach((item) => {
-
-        // Create the card
-        const card = document.createElement("article");
-        card.className = "card";
-
-        // Create the image
-        const img = document.createElement("img");
-        img.src = item.imageinfo[0].thumburl;
-        img.alt = item.title;
-
-        // Create the caption
-        const caption = document.createElement("p");
-        caption.textContent = item.title;
-
-        // Add image to card
-        card.appendChild(img);
-
-        // Add caption to card
-        card.appendChild(caption);
-
-        // Add card to results grid
-        results.appendChild(card);
-    });
 });
 
 // Clear button

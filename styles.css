@@ -470,3 +470,25 @@ footer {
         height: 240px;
     }
 }
+
+/* Part 3 status messages */
+
+#resultCount {
+    transition: opacity 0.2s ease;
+}
+
+/* Loading state */
+.loading-message {
+    font-weight: 600;
+}
+
+/* Empty and error messages */
+.status-message {
+    padding: 24px;
+    margin-top: 20px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid #e6e3dc;
+    text-align: center;
+    font-weight: 600;
+}
